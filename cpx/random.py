@@ -10,31 +10,23 @@ pixels = neopixel.NeoPixel(board.NEOPIXEL, 10, brightness=0.03, auto_write=False
 def make_state(idx):
     gc.collect()  # reclaim previous state's memory before allocating new one
 
-
-    if idx == 6:
-        from adafruit_led_animation.animation.sparklepulse import SparklePulse
-        return SparklePulse(pixels, speed=0.05, color=PINK, period=3)
-    if idx == 7:
-        from adafruit_led_animation.animation.sparkle import Sparkle
-        return Sparkle(pixels, speed=0.05, color=RED, num_sparkles=3)
-
-    if idx == 9:
-        from adafruit_led_animation.animation.chase import Chase
-        return Chase(pixels, speed=0.05, color=GREEN, size=3, spacing=2)
-    if idx == 10:
+    if idx == 0:
         from adafruit_led_animation.animation.colorcycle import ColorCycle
         return ColorCycle(pixels, speed=0.05, colors=[RED, GREEN, BLUE])
-
-
-    if idx == 20:
-        from adafruit_led_animation.animation.pacman import PacMan
-        return PacMan(pixels, speed=0.05, color=YELLOW, tail_length=3, bounce=True)
-
+#Cycles of having all the pixeled different colors.
+    if idx == 1:
+        from adafruit_led_animation.animation.sparkle import Sparkle
+        return Sparkle(pixels, speed=1, color=PURPLE, num_sparkles=3)
+# Turns on a few random pixels at a time,
+    if idx == 2:
+        from adafruit_led_animation.animation.sparklepulse import SparklePulse
+        return SparklePulse(pixels, speed=0.05, color=BLUE, period=3)
+# Turns on a few random pixels at a time, and then fades them out, and repeats this process.
 
 
     return None
 
-current = make_state(0)
+current = make_state(2)
 print("States: 0=Pulse 1=Comet 2=Blink 3=Rainbow 4=RainbowChase 5=RainbowSparkle 6=SparklePulse 7=Sparkle 8=RainbowComet 9=Chase 10=ColorCycle 11=Solid 12=CustomColorChase 13=CustomColorWipe 14=CustomColorPulse 15=CustomColorFade 16=CustomColorBreath 17=CustomColorStrobe 18=CustomColorWave 19=CustomColorChase 20=PacMan 21=Blink(Pink)")
 
 while True:
@@ -45,7 +37,7 @@ while True:
             if new_state:
                 current = new_state
             else:
-                print(f"No state {idx}")
+                print(f"State {idx} | free: {gc.mem_free()}")
         except ValueError:
             print("Enter an integer")
     current.animate()

@@ -14,7 +14,6 @@ look up adafruit_led_animation online to find the github and then can see all
 -- comet
 -- custoncolorchase
 - grid rain
-- multicolor_color_comet
 - pacman
 -- pulse
 -- rainbow ( , chase, comet, sparkle)
